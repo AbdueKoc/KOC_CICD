@@ -79,13 +79,14 @@ jobs:
           severity: 'CRITICAL,HIGH'
           exit-code: 1
 
-      - name: Scan IaC
-        uses: aquasecurity/trivy-action@0.10.0
-        continue-on-error: true
+      - name: Scan IaC (Dockerfile) with Trivy
+        uses: aquasecurity/trivy-action@v0.10.0
+        continue-on-error: false
         with:
-          scan-type: 'config'
-          severity: 'CRITICAL,HIGH'
-
+          scan-type: config
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          scan-ref: ./Dockerfile
 
   sonarCloud:
   
